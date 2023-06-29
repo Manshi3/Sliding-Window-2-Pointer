@@ -1,3 +1,13 @@
+Approach is to store the elements in a map and using sliding window technique
+check if the size of map is equal to k on each window. The window which has map size equal to k
+is having distict elements.
+
+1. Store first k elements in the map.
+2. Then keep traversing through the array and adding the new one to the map and 
+removing the old one(i-k th) element form the map if its count is zero.
+3. Do same for the total sum, add ith value and remove i-k th value.
+4. Maximize ans by taking max sum value. 
+
 class Solution {
 public:
     long long maximumSubarraySum(vector<int>& nums, int k) {
@@ -12,7 +22,7 @@ public:
                 if(mp.size() == k) maxi = max(maxi, sum);
                 mp[nums[i]]--;    // move window by removing calc of i
                 sum -= nums[i];    // remove calc of i from sum as well
-                if(mp[nums[i]] == 0) mp.erase(nums[i]);   // earse it from map
+                if(mp[nums[i]] == 0) mp.erase(nums[i]);   // erase it from map
                 i++, j++;
             } 
         }
