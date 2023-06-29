@@ -1,0 +1,7 @@
+array/string
+subarray/substring
+size k - window size
+condition
+
+yato window size de rkhi hogi, condition lga ke ans nikalna pdega. 
+yato condition de rkhi hogi, window size nikalna pdega.
