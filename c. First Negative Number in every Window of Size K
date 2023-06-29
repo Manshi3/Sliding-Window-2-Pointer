@@ -25,7 +25,7 @@ vector<int> firstNegative(vector<int> arr, int n, int k) {
 	int i = 0, j = 0;
 
 	while(j < n) {
-		if(arr[j] < 0) q.push(j);
+		if(arr[j] < 0) q.push(j);		
 
 		if((j-i+1) < k) j++;
 
@@ -40,3 +40,7 @@ vector<int> firstNegative(vector<int> arr, int n, int k) {
 	}
 	return ans;
 }
+// jitne bhi -ve elements hai vo sab queue me push krdo. ham phle dekhenege ki agr quue khali hai mtlb array me koi negative elemnts ni to ans vector me 0 push kr denge. 
+agr queueu me -ve lements hai, to phla ans vector me daal denge vo phla wala, and obv hme pop bhi krna hoga na ham aage bhada rhe hai window slide kr rhe.
+window slide kr rhe mtlb phle wale elements to hatne pdenge na to ham kya krte ham queue me dekhte kya uska phla element apne array se match kr rhe hai, kr rha hai and vo 
+alredy daal diya ans vector me to pop krdo na. and aage hada do i++ j++ window aage bhada do.
