@@ -1,0 +1,32 @@
+k size given nhi hai, k size hme nikalna hai - kaise pta k size nikalna hai? well, we are given strings, wjisme ek char multiple times repeat ho rhe hai, and hme return krna hai
+ans jisme us char ke bas 1 baar ke elements ho. mtlb input agr aabbccddaa de rjha hai to output should be 4, kyuki ye bas abcd hai unke size return krne hai.
+
+obs ab we can say sliding window ki size nhi de rkhi, k to hme hi return krna hai.
+
+best explanation till date - 
+https://leetcode.com/problems/longest-substring-without-repeating-characters/solutions/2133524/java-c-a-reall-detailed-explanation/
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        if(s.length() == 0) return 0;
+        int maxi = INT_MIN;
+        int i = 0, j = 0;
+        unordered_map<int, int> mp;
+        while(j < s.length()) {
+            mp[s[j]]++;
+            if(mp.size() < j-i+1) { // we have to increment i and remove ith index from the map
+                while(mp.size() < j-i+1) {
+                    mp[s[i]]--;
+                    if(mp[s[i]] == 0) mp.erase(s[i]);
+                    i++;
+                }
+            }
+            else if(mp.size() == j-i+1) { // if the map size is equal to it, what's the max?
+                maxi = max(maxi, j-i+1);
+            }
+            j++;
+        }
+        return maxi;
+    }
+};
