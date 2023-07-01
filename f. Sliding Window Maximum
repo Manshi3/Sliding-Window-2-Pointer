@@ -1,0 +1,29 @@
+class Solution {
+public:
+    vector<int> maxSlidingWindow(vector<int>& nums, int k) {
+       vector<int> ans;
+        int i = 0, j = 0;
+        deque<int> q;
+        while(j < nums.size()) {
+// if the current element that is nums[j] is   greater than  
+//previous elements present in the list then pop all  elements
+//till we encouter an element which is greater than nums[j]
+
+  while(!q.empty() && q.back() < nums[j]) q.pop_back();
+            q.push_back(nums[j]);     
+
+  // if the window size is not met move j.
+   if(j-i+1 < k) j++;
+  // when the size is me 
+  else if(j-i+1==k){
+  // front wala maximum hoga toh usko push
+                ans.push_back(q.front());
+   //to move the window remove ith element from list
+                if(q.front() == nums[i]) q.pop_front();
+   //increment i as well as j
+                i++, j++;
+            }
+       }
+    return ans;
+    }
+};
