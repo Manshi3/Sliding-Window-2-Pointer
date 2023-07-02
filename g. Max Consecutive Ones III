@@ -1,0 +1,28 @@
+Given a binary array nums and an integer k, return the maximum number of consecutive 1's in the array if you can flip at most k 0's.
+
+class Solution {
+public:
+    int longestOnes(vector<int>& nums, int k) {
+        int maxi = INT_MIN;
+        int sum = 0;
+        int i = 0, j = 0;
+        while(j < nums.size()) {
+            if(nums[j] == 0) k--;
+            while(k < 0) {
+                if(nums[i] == 0) {
+                    k++;
+                }
+                i++;
+            }
+            maxi = max(maxi, j-i+1);
+            j++;
+        }
+        return maxi;
+    }
+};
+
+-hme de rkhe arrays and k. k yha window size bilkul nhi hai. hme kya krna hai 0 aur 1 krke numbers de rkhe hai and hme k de rkhe hai, mtlb ham k times 0 ko 1 me flip kr skte.
+and hence we have to return the maximum number we get total after we flip k number of times 0. 
+-we will iterate jab tak j end tak nhi aa jata. ham dekhenge kya hmare element ki value 0 hai? agr hai to k-- krdo. agr k ki value -- krte krte 0 se kam ho gyi, mtlb hmne 
+kuvh k 0 elements ko 1 me flip krdiya hai imaginaraly. and since k is less than 0, ham apni window aage slide krenge and i aage krenge obv.
+-return the max of ab tak ki indexes j-i+1
