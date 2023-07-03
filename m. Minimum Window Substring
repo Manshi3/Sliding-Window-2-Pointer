@@ -1,0 +1,28 @@
+class Solution {
+public:
+    string minWindow(string s, string t) {
+        // Statistic for count of char in t
+        vector<int>mp(128,0);
+        for(auto c : t) mp[c]++;
+
+        int i = 0, j = 0, k = t.size(), mini = INT_MAX, minstart = 0, minlen = INT_MAX;
+
+        while(j < s.size()) {
+            // If char in s exists in t, decrease k(exhaust k as we find char)
+            if(mp[s[j]] > 0) k--; 
+            // If char does not exist in t, decrease mp[s[j]] and move further
+            mp[s[j]]--, j++;
+
+            while(k == 0) {    // once our k is exhaused
+                // When we found a valid window, move start to find smaller window.
+                if(j - i < minlen) minstart = i, minlen = j - i;
+                mp[s[i]]++;
+                // When char exists in t, increase counter.
+                if(mp[s[i]] > 0) k++;
+                i++;
+            }
+        }
+        if(minlen != INT_MAX) return s.substr(minstart, minlen);
+        return "";
+    }
+};
